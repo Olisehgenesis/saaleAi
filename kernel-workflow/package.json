@@ -1,0 +1,23 @@
+{
+  "name": "kernel-workflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy-account": "ts-node src/deploy-automation-account.ts",
+    "register-executor": "ts-node src/register-executor.ts",
+    "agent-workflow": "ts-node src/agent-workflow.ts"
+    
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.10.7",
+    "brahma-console-kit": "^1.0.6",
+    "ethers": "^6.13.5",
+    "ethers-multisend": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
