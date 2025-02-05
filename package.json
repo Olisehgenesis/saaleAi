@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.13.1"
+  },
+  "dependencies": {
+    "brahma-console-kit": "^1.0.7",
+    "openai": "^4.82.0"
+  }
+}
