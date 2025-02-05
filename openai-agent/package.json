@@ -9,11 +9,12 @@
         "balance-agent": "ts-node src/test/balancer.ts"
     },
     "dependencies": {
-        "openai": "^4.28.0",
         "brahma-console-kit": "^1.0.6",
-        "express": "^4.21.2",
         "cors": "^2.8.5",
+        "ethers": "^6.13.5",
+        "express": "^4.21.2",
         "http-status": "^2.1.0",
+        "openai": "^4.28.0",
         "zod": "^3.22.4"
     },
     "devDependencies": {
