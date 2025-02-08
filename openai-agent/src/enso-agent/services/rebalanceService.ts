@@ -1,6 +1,6 @@
 // services/rebalanceService.ts
 import axios from 'axios';
-import { ConsoleKit, Address } from 'brahma-console-kit';
+import { ConsoleKit, Address, SendParams } from 'brahma-console-kit';
 import { YieldData } from './yieldMonitor';
 import { BASE_CHAIN_ID, MAX_SLIPPAGE, REBALANCE_THRESHOLD } from '../config/protocols';
 
@@ -62,19 +62,23 @@ export class RebalanceService {
 
       // Execute the bundle transaction using ConsoleKit
       const { data } = bundleResponse.data;
+      
+      // Creating proper SendParams object
+      const sendParams: SendParams = {
+        to: data.to as Address,
+        amount: data.value || '0',
+        tokenAddress: from.tokenAddress as Address
+      };
+
       const tx = await this.consoleKit.coreActions.send(
         BASE_CHAIN_ID,
         accountAddress as Address,
-        {
-          to: data.to as Address,
-          data: data.data,
-          value: data.value || '0'
-        }
+        sendParams
       );
 
       return {
         success: true,
-        transactionHash: tx.hash,
+        transactionHash: tx.data.transactions[0].data,
         from: from.protocol,
         to: to.protocol,
         amount: amount.toString()
@@ -86,6 +90,33 @@ export class RebalanceService {
         success: false,
         error: error instanceof Error ? error.message : 'Unknown error'
       };
+    }
+  }
+
+  async estimateGas(
+    from: YieldData,
+    to: YieldData,
+    amount: bigint
+  ) {
+    try {
+      const response = await axios.get(
+        'https://api.enso.finance/api/v1/gas/estimate',
+        {
+          headers: {
+            'Authorization': `Bearer ${this.ensoApiKey}`
+          },
+          params: {
+            chainId: BASE_CHAIN_ID,
+            fromProtocol: from.protocol,
+            toProtocol: to.protocol,
+            amount: amount.toString()
+          }
+        }
+      );
+      return response.data.estimatedGas;
+    } catch (error) {
+      console.error('Gas estimation failed:', error);
+      throw error;
     }
   }
 
