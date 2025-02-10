@@ -1,4 +1,3 @@
-// agent/yieldAgent.ts
 import OpenAI from "openai";
 import { ConsoleKit } from 'brahma-console-kit';
 import { YieldMonitor } from './services/yieldMonitor';
@@ -157,27 +156,6 @@ Respond with a clear YES or NO and explanation for each opportunity.`;
       };
     } catch (error) {
       console.error('Performance analysis failed:', error);
-      throw error;
-    }
-  }
-
-  async estimateGasCosts(opportunities: any[]) {
-    try {
-      const estimates = [];
-      for (const opp of opportunities) {
-        const estimate = await this.rebalanceService.estimateGas(
-          opp.from,
-          opp.to,
-          opp.amount
-        );
-        estimates.push({
-          opportunity: opp,
-          gasCost: estimate
-        });
-      }
-      return estimates;
-    } catch (error) {
-      console.error('Gas estimation failed:', error);
       throw error;
     }
   }

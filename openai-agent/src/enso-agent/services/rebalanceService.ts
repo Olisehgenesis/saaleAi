@@ -1,4 +1,3 @@
-// services/rebalanceService.ts
 import axios from 'axios';
 import { ConsoleKit, Address, SendParams } from 'brahma-console-kit';
 import { YieldData } from './yieldMonitor';
@@ -90,33 +89,6 @@ export class RebalanceService {
         success: false,
         error: error instanceof Error ? error.message : 'Unknown error'
       };
-    }
-  }
-
-  async estimateGas(
-    from: YieldData,
-    to: YieldData,
-    amount: bigint
-  ) {
-    try {
-      const response = await axios.get(
-        'https://api.enso.finance/api/v1/gas/estimate',
-        {
-          headers: {
-            'Authorization': `Bearer ${this.ensoApiKey}`
-          },
-          params: {
-            chainId: BASE_CHAIN_ID,
-            fromProtocol: from.protocol,
-            toProtocol: to.protocol,
-            amount: amount.toString()
-          }
-        }
-      );
-      return response.data.estimatedGas;
-    } catch (error) {
-      console.error('Gas estimation failed:', error);
-      throw error;
     }
   }
 

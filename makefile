@@ -47,6 +47,11 @@ run-register-executor:
 run-agent-workflow:
 	cd kernel-workflow && yarn agent-workflow
 
+
+run-enso-agent:
+	cd openai-agent && yarn yield-agent
+
+
 # Enhanced deploy-account command with parameter support
 run-deploy-account: check_env
 	@echo "Deploying automation account with following parameters:"
