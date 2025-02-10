@@ -1,8 +1,8 @@
 // agent/yieldAgent.ts
 import OpenAI from "openai";
 import { ConsoleKit } from 'brahma-console-kit';
-import { YieldMonitor } from '../services/yieldMonitor';
-import { RebalanceService } from '../services/rebalanceService';
+import { YieldMonitor } from './services/yieldMonitor';
+import { RebalanceService } from './services/rebalanceService';
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 export class YieldOptimizationAgent {
