@@ -42,7 +42,7 @@ run-agent:
 	cd openai-agent && yarn agent
 
 run-register-executor:
-	cd kernel-workflow && yarn register-executor
+	cd kernel-workflow/src && yarn register-executor.ts
 
 run-agent-workflow:
 	cd kernel-workflow && yarn agent-workflow
@@ -63,7 +63,7 @@ run-deploy-account: check_env
 	@echo "Automation Interval: $(AUTOMATION_INTERVAL)"
 	@echo "Receiver: $(RECEIVER)"
 	@echo "Transfer Amount: $(TRANSFER_AMOUNT)"
-	@cd kernel-workflow && INPUT_TOKEN=$(INPUT_TOKEN) \
+	@cd kernel-workflow/src && INPUT_TOKEN=$(INPUT_TOKEN) \
 		INPUT_AMOUNT=$(INPUT_AMOUNT) \
 		ITERATION_LIMIT=$(ITERATION_LIMIT) \
 		DURATION=$(DURATION) \
@@ -71,7 +71,7 @@ run-deploy-account: check_env
 		RECEIVER=$(RECEIVER) \
 		TRANSFER_AMOUNT=$(TRANSFER_AMOUNT) \
 		CHAIN_ID=$(CHAIN_ID) \
-		yarn deploy-account
+		yarn deploy-automation-account.ts
 
 # Deployment presets for different networks
 
