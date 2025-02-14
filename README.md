@@ -1,103 +1,126 @@
-# Scaffold Agent
 
-A collection of example implementations showcasing how to build autonomous DeFi agents using Console Kit. This repository demonstrates integration patterns ranging from LLM-powered execution to automated DeFi workflows.
+# Saala AI with ConsoleKit Integration
 
-![kernel-setup](./images/overview.png)
+Welcome to the Saala AI repository! This project showcases how to build autonomous agents for decentralized finance (DeFi) applications using ConsoleKit. By leveraging ConsoleKit, you can seamlessly integrate AI-driven decision-making with secure, on-chain execution. Saala AI focuses on providing intelligent automation and robust security for a variety of DeFi use cases.
 
-## Purpose
+## Project Overview
 
-This scaffold serves as a starting point for developers looking to build autonomous DeFi agents. Whether you're interested in LLM-powered automation or traditional programmatic workflows, these examples provide patterns for integrating Console Kit's capabilities into your applications.
+Saala AI is built using ConsoleKit, which provides the necessary infrastructure to connect AI agents with blockchain execution. The system uses Brahma's battle-tested security framework and customizable policy engine to ensure that AI agents can make and execute decisions in a secure and trusted environment.
 
-## Overview
+### Features:
+- AI-powered decision-making in DeFi
+- Seamless integration with multiple blockchain networks (Base, Swell, Mode)
+- Secure on-chain execution using ConsoleKit's smart accounts
+- Customizable safety policies for enhanced risk management
+- Optimized for autonomous agent functionality (rebalancing, yield farming, cross-chain transfers, etc.)
 
-The repository contains two core components:
+## Getting Started
 
-### OpenAI Agent
+To start building your project using Saala AI and ConsoleKit, follow these instructions.
 
-A LangChain-based implementation showing how to create LLM agents that can execute DeFi operations through Console Kit. The agent integrates Console Kit's native tools (cross-chain bridges, swap routing, token transfers etc.) into a LangChain executor, enabling natural language driven DeFi automation.
+### Step 1: Install Dependencies
 
-### Kernel Workflow
-
-Example implementations of automated DeFi workflows using Console Kit's infrastructure. These examples demonstrate how to set up autonomous agents that can execute complex DeFi strategies while leveraging Console's policy engine and execution framework.
-
-## Local setup
-
-1. Install dependencies
+Start by cloning the repository and installing the necessary dependencies:
 
 ```bash
-cd openai-agent && yarn
+git clone https://github.com/your-repository/saala-ai.git
+cd saala-ai
+yarn install
 ```
+
+### Step 2: Set Up Environment Variables
+
+You’ll need to configure your environment variables to ensure proper integration with ConsoleKit.
+
+1. Copy the environment template file:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open `.env` and fill in the required values, such as your API key for ConsoleKit and network configurations.
+
+### Step 3: Running the Agent
+
+Once your environment is set up, you can run the Saala AI agent locally.
+
+#### Example Command:
 
 ```bash
-cd kernel-workflow && yarn
+make run-saala-ai-agent
 ```
 
-2. Set up environment variables and fill all values
+This will start the agent and allow you to execute actions like:
 
+- Swap tokens between DeFi protocols
+- Rebalance positions across platforms like AAVE, Morpho, and Fluid
+- Automate cross-chain operations
+
+For more complex workflows, you can modify the logic inside `agent-workflow.ts` or extend it with custom strategies.
+
+### Step 4: Integrating with ConsoleKit
+
+If you wish to interact with ConsoleKit’s core actions (like Swap, Lending, and Bridge), you can use the following functions:
+
+1. **Swap Tokens:** 
+   Execute swaps between tokens across multiple networks, leveraging ConsoleKit’s `swapTool`.
+
+2. **Lending Positions:**
+   Automate lending positions on platforms like AAVE and Fluid, adjusting the amount based on market conditions.
+
+3. **Cross-Chain Operations:**
+   Use the `bridgeTool` to facilitate cross-chain transfers, allowing the agent to move tokens seamlessly between different networks (Base, Swell, Mode).
+
+4. **Enso Finance Integration:**
+   Utilize Enso Finance to aggregate liquidity from multiple DeFi protocols and optimize yield farming strategies. Integrate with Enso Shortcuts for efficient and streamlined operations.
+
+## Use Cases for Saala AI
+
+### 1. **Rebalancing DeFi Positions**
+Automatically rebalance liquidity positions between different DeFi protocols (AAVE, Fluid, and Morpho) based on current APY rates and risk assessments.
+
+Example:
 ```bash
-mv .env.example .env
+> Rebalance positions between AAVE and Morpho based on the current APY and liquidity conditions.
 ```
 
-## Running components
+### 2. **Cross-Chain Yield Optimization**
+Maximize yield by optimizing token placement between DeFi protocols on different chains (Base, Swell, Mode), using ConsoleKit’s cross-chain capabilities.
 
-### OpenAI Agent
-
-1. Run the local test agent:
-
+Example:
 ```bash
-make run-agent
+> Optimize token yield between Base and Mode by moving liquidity to the highest-earning platform.
 ```
 
-from root dir
+### 3. **Smart Account Automation**
+Use Saala AI for treasury management, automatically transferring funds between platforms, or processing multi-step DeFi transactions with safety checks.
 
-This will start an interactive session where you can chat with the agent. The agent can:
-
-- Send tokens
-- Bridge tokens between chains
-- Check bridge status
-- Swap tokens
-
-Example commands:
-
-```
-> Send 100 USDC from 0x123... to 0x456... on chain 1
-> Bridge 100 USDC from Ethereum to Polygon
-> Check bridge status for transaction 0x789... with pid 1
-> Swap 100 USDC for ETH on Ethereum
+Example:
+```bash
+> Automate treasury management by distributing salaries based on predefined conditions and schedules.
 ```
 
-Type 'exit' to quit the interactive session.
+### 4. **Enso Finance Integration for Yield Farming**
+Aggregate liquidity across protocols using Enso Finance’s optimized yield strategies, improving yield farming efficiency.
 
-### Kernel Workflow
+Example:
+```bash
+> Leverage Enso Shortcuts for multi-protocol yield farming between Base, Morpho, and AAVE.
+```
 
-1. To register your executor on console & kernel -
+---
 
-   - Configure `ExecutorConfigConsole`, `ExecutorMetadata`, and `ExecutorConfigKernel` on [register-executor.ts](./kernel-workflow/src/register-executor.ts) as per your requirements
-   - Run from root dir:
+## Join the Community
 
-   ```
-   make run-register-executor
-   ```
+- **Brahma Discord:** Get help and engage with other developers: [Discord Link](https://discord.com/invite/khXHEnvS6N)
+- **Brahma Builders Telegram:** Join the Brahma Builders group for support: [Telegram Link](https://t.me/+O5fFUPVBFvU3ZjY1)
 
-   - Pick up `registryId` from the script's response and update `EXECUTOR_REGISTRY_ID` in your .env, for running the remaining scripts
+## Additional Resources
 
-2. To deploy a console account that is subscribed to the automation of the executor just registered -
-   - Configure `AutomationSubscriptionParams` on [deploy-automation-account.ts](kernel-workflow/src/deploy-automation-account.ts) as per your requirements
-   - Run from root dir:
-   ```
-   make run-deploy-account
-   ```
-3. To run your automation workflow -
-   - Modify `pollTasksAndSubmit()` on [agent-workflow.ts](kernel-workflow/src/agent-workflow.ts) with your automation logic. Console Kit SDK comes pre-built with native actions & helpers to make this easier
-   - Run from root dir:
-   ```
-   make run-agent-workflow
-   ```
-   This will poll for your executable tasks, and run your automation periodically
-
-## Additional Links
-
-- [Console Kit Docs](https://github.com/Brahma-fi/console-kit/blob/ft-docs/docs/introduction.md)
-- [Console Kit SDK](https://www.npmjs.com/package/brahma-console-kit)
+- [ConsoleKit Documentation](https://github.com/Brahma-fi/console-kit)
+- [ConsoleKit SDK](https://www.npmjs.com/package/brahma-console-kit)
+- [Scaffold Agent Repository](https://github.com/Brahma-fi/scaffold-agent)
 - [Brahma Builder](https://github.com/Brahma-fi/brahma-builder)
-- [Discord](https://discord.com/invite/khXHEnvS6N) (Join to get Console API credentials)
+
+---
+
+Start building with Saala AI and take your DeFi agents to the next level! 🚀
+
